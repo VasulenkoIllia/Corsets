@@ -1,0 +1,27 @@
+<ng-template #authModal let-modal>
+  <div class="modal-header">
+    <button type="button"
+            class="btn btn-primary"
+            (click)="toggleEditor('login') ">
+      Log In
+    </button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="toggleEditor('signin')">
+      Sign Up
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-login *ngIf="chengeLonInEditor"></app-login>
+    <app-sign-in *ngIf="chengeSignInEditor"></app-sign-in>
+  </div>
+</ng-template>
+
+<nav class="auth-nav">
+  <button type="button" class="btn btn-primary" data-toggle="modal"  (click)="toggleAndOpen('login',authModal) ">
+    Log In
+  </button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" (click)="toggleAndOpen('signin',authModal)">
+    Sign Up
+  </button>
+</nav>

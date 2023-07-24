@@ -18,10 +18,10 @@ const routes: Routes = [
         path: "signin",
         component: SignInComponent
       },
-      {
-        path: "**",
-        redirectTo: "login"
-      }
+      // {
+      //   path: "**",
+      //   redirectTo: "login"
+      // }
 
     ]
   },];
