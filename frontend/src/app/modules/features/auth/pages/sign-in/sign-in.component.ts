@@ -6,7 +6,12 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, 
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  formControl:any
+   formEror = {}
+  email:any
+  // login?:any
+  // password?:any
+  // checkPassword?:any
+
   singInForm = new FormGroup({
     email: new FormControl('',[Validators.required, Validators.email]),
     login: new FormControl('',[Validators.required]),
@@ -15,7 +20,8 @@ export class SignInComponent implements OnInit {
       Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
       Validators.minLength(6),
       Validators.maxLength(25),
-      this.matchValidator('confirmPassword', true)],),
+      this.matchValidator('checkPassword', true)],
+      ),
     checkPassword: new FormControl('',[
       Validators.required,
       this.matchValidator('password')]),
@@ -27,14 +33,21 @@ export class SignInComponent implements OnInit {
     if (this.singInForm.valid){
       console.log(this.singInForm.value)
     }
-    else
-      console.log(this.singInForm.errors)
-
-
  }
 
   ngOnInit(): void {
   }
+
+  getControllError(controllName:string):boolean{
+     const control:AbstractControl<any, any> | null = this.singInForm.get(controllName)
+    if (!control){
+      return false
+    }
+    else {
+      return control.invalid && control.touched
+    }
+  }
+
 
    matchValidator(
     matchTo: string,
@@ -43,7 +56,7 @@ export class SignInComponent implements OnInit {
     return (control: AbstractControl):
       ValidationErrors | null => {
       if (control.parent && reverse) {
-        const c = (control.parent?.controls as any)[matchTo]as AbstractControl;
+        const c = (control.parent?.controls as any)[matchTo] as AbstractControl;
         if (c) {
           c.updateValueAndValidity();
         }
