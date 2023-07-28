@@ -6,11 +6,6 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, 
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-   formEror = {}
-  email:any
-  // login?:any
-  // password?:any
-  // checkPassword?:any
 
   singInForm = new FormGroup({
     email: new FormControl('',[Validators.required, Validators.email]),

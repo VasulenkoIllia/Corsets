@@ -1,12 +1,30 @@
-<form>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <div class="cross-validation" [class.cross-validation-error]="getControllError('email')">
+    <label>Email address</label>
+    <input type="email"
+           class="form-control"
+           placeholder="Enter email"
+           formControlName="email"
+           required>
+      <div *ngIf=" getControllError('email')" class="alert alert-danger">
+        Please enter Email
+      </div>
+    </div>
   </div>
+
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <div class="cross-validation" [class.cross-validation-error]="getControllError('email')">
+    <label>Password</label>
+    <input type="password"
+           class="form-control"
+           placeholder="Password"
+           formControlName="password"
+           required>
+    <div *ngIf="getControllError('password')" class="alert alert-danger">
+      Please enter password
+    </div>
+    </div>
   </div>
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
